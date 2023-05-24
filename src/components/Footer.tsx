@@ -1,15 +1,19 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { peopleState } from "../state/atoms";
 import { useDrawer } from "../state/hooks/useDrawer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ThemeChanger from "./ThemeChanger";
 export default function Footer() {
   const people = useRecoilValue(peopleState);
+  const resetPeople = useResetRecoilState(peopleState);
   const navigate = useNavigate();
   const draw = useDrawer();
+  const location = useLocation();
+
   const handleStartDraw = () => {
-    draw();
-    navigate("/results");
+    location.pathname === "/results" ? resetPeople() : draw();
+
+    navigate(location.pathname === "/results" ? "/" : "/results");
   };
 
   return (
@@ -21,7 +25,7 @@ export default function Footer() {
           disabled={people.length < 3}
           onClick={handleStartDraw}
         >
-          Start Draw! 🎉
+          {location.pathname === "/results" ? "Restart" : " Start Draw! 🎉"}
         </button>
       </div>
     </footer>
