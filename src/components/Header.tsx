@@ -1,9 +1,12 @@
-import StreamlineEmojisGameDice from "./StreamlineEmojisGameDice";
+import StreamlineEmojisGameDice from "./Assets/StreamlineEmojisGameDice";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="navbar bg-base-300 h-24 shadow-xl">
+    <div
+      className="navbar bg-base-300 h-24 shadow-xl"
+      data-testid="header-component"
+    >
       <div className="navbar-start"></div>
       <div className="navbar-center">
         <Link to="/" className="flex flex-row items-center">

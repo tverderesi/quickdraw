@@ -26,7 +26,7 @@ export default function Form() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center" data-testid="form-component">
       <h2 className="font-0 text-3xl font-medium p-5"> Participants</h2>
       <form
         onSubmit={handleSubmit}

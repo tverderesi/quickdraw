@@ -7,10 +7,15 @@ export default function ThemeChanger() {
   }, []);
   return (
     <div className="flex flex-col items-center  gap-2 ">
-      <label htmlFor="theme-select" className="text-base font-semibold">
+      <label
+        htmlFor="theme-select"
+        className="text-base font-semibold"
+        aria-labelledby="theme-select"
+      >
         Theme
       </label>
       <select
+        id="theme-select"
         data-choose-theme
         className="select select-bordered select-accent shadow-xl w-40 select-sm"
       >

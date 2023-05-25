@@ -1,0 +1,89 @@
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import { RecoilRoot, useRecoilValue, useResetRecoilState } from "recoil";
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+
+jest.mock("recoil");
+jest.mock("react-router-dom");
+
+describe("Footer", () => {
+  beforeEach(() => {
+    const resetPeopleMock = jest.fn();
+    const navigateMock = jest.fn();
+    const drawMock = jest.fn();
+
+    useResetRecoilState.mockImplementation(() => resetPeopleMock);
+    useLocation.mockImplementation(() => ({ pathname: "/results" }));
+    useNavigate.mockImplementation(() => navigateMock);
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
+
+  it("should render the footer correctly", () => {
+    render(
+      <RecoilRoot>
+        <BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </RecoilRoot>
+    );
+
+    const footerElement = screen.getByTestId("footer-component");
+    expect(footerElement).toBeInTheDocument();
+
+    const startDrawButton = screen.getByText(" Start Draw! 🎉");
+    expect(startDrawButton).toBeInTheDocument();
+    expect(startDrawButton).toBeEnabled();
+  });
+
+  it("should call the resetPeople function and navigate on button click when on /results path", () => {
+    render(
+      <RecoilRoot>
+        <BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </RecoilRoot>
+    );
+
+    const startDrawButton = screen.getByText("Restart");
+    fireEvent.click(startDrawButton);
+
+    expect(useResetRecoilState).toHaveBeenCalledTimes(1);
+    expect(useResetRecoilState).toHaveBeenCalledWith(expect.any(Function));
+    expect(useResetRecoilState.mock.calls[0][0]()).toHaveBeenCalledTimes(1);
+
+    expect(useNavigate).toHaveBeenCalledTimes(1);
+    expect(useNavigate).toHaveBeenCalledWith(expect.any(Function));
+    expect(useNavigate.mock.calls[0][0]("/")).toHaveBeenCalledTimes(1);
+
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it("should call the draw function and navigate on button click when not on /results path", () => {
+    useLocation.mockImplementation(() => ({ pathname: "/" }));
+
+    render(
+      <RecoilRoot>
+        <BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </RecoilRoot>
+    );
+
+    const startDrawButton = screen.getByText(" Start Draw! 🎉");
+    fireEvent.click(startDrawButton);
+
+    expect(useResetRecoilState).not.toHaveBeenCalled();
+
+    expect(useNavigate).toHaveBeenCalledTimes(1);
+    expect(useNavigate).toHaveBeenCalledWith(expect.any(Function));
+    expect(useNavigate.mock.calls[0][0]("/results")).toHaveBeenCalledTimes(1);
+
+    expect(console.error).not.toHaveBeenCalled();
+  });
+});

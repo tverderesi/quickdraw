@@ -1,4 +1,4 @@
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { peopleState } from "../state/atoms";
 import { useDrawer } from "../state/hooks/useDrawer";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,7 +17,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer absolute bottom-0 h-24 bg-base-300 shadow-neg-xl  w-full pb-5">
+    <footer
+      data-testid="header-component"
+      className="footer absolute bottom-0 h-24 bg-base-300 shadow-neg-xl  w-full pb-5"
+    >
       <div className="flex flex-row items-end px-5 w-full h-full justify-between">
         <ThemeChanger />
         <button

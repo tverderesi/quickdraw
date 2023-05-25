@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component renders Form and Participants components 1`] = `
+<div
+  class="flex flex-col items-center"
+  data-testid="form-component"
+>
+  <h2
+    class="font-0 text-3xl font-medium p-5"
+  >
+     Participants
+  </h2>
+  <form
+    class="w-100 flex flex-row gap-5 items-center justify-center"
+  >
+    <div
+      class="relative"
+    >
+      <input
+        class="input input-primary input-bordered w-full pr-16"
+        placeholder="Add a participant"
+        type="text"
+      />
+      <button
+        class="btn btn-secondary  absolute top-0 right-0 rounded-l-none shadow-lg"
+        disabled=""
+      >
+        Add
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`Home component renders Form and Participants components 2`] = `
+<div
+  class="card py-6 px-3 bg-info shadow-2xl shadow-neutral m-5 lg:m-10 text-info-content min-h-fit "
+  data-testid="participants-component"
+>
+  <h2
+    class="text-center text-3xl font-bold"
+  >
+    Participants
+  </h2>
+   
+  <ul
+    class="grid md:grid-cols-2 lg:grid-cols-3 mt-5"
+  >
+    <p
+      class="p-3 text-3xl font-medium text-center col-span-1 md:col-span-2 lg:col-span-3"
+    >
+      No participants yet.
+    </p>
+  </ul>
+</div>
+`;

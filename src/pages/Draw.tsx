@@ -1,8 +1,8 @@
 import { usePeople } from "../state/hooks/usePeople";
-import { ButtonHTMLAttributes, useState, MouseEventHandler } from "react";
+import { useState } from "react";
 import { useDrawResults } from "../state/hooks/useDrawResults";
-import OouiArrowPreviousLtr from "../components/OouiArrowPreviousLtr";
-import OouiArrowNextLtr from "../components/OouiArrowNextLtr";
+import OouiArrowPreviousLtr from "../components/Assets/OouiArrowPreviousLtr";
+import OouiArrowNextLtr from "../components/Assets/OouiArrowNextLtr";
 
 export default function Draw() {
   const people = usePeople();

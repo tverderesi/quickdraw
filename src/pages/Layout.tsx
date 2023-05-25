@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <Outlet data-testid="outlet-component" />
       <Footer />
     </>
   );
